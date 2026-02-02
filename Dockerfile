@@ -16,7 +16,7 @@ RUN pip install poetry==2.3.2
 COPY pyproject.toml poetry.lock* /code/
 
 # Install dependencies using Poetry
-RUN poetry env use python3.12 && poetry install
+RUN poetry install
 
 # Copy the rest of the project code
 COPY . /code/
