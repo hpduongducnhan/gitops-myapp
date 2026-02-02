@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "myapp"}]
+packages = []
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
