@@ -33,17 +33,24 @@ jobs:
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.revision=${{ github.sha }}
 
-      - name: Update Helm values in infra repo
+      # SỬA LỖI: Cài đặt yq TRƯỚC KHI sử dụng nó
+      - name: Install yq
+        run: |
+          sudo wget https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64 -O /usr/local/bin/yq &&\
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Check out infra repository
         uses: actions/checkout@v3
         with:
           repository: hpduongducnhan/mysvr-infra # Your infrastructure repository
           path: 'mysvr-infra'
           ssh-key: ${{ secrets.INFRA_REPO_DEPLOY_KEY }} # Using a deploy key for authentication
 
-      - name: Update image tag in values.yaml
+      - name: Update image tag and push to infra repo
         run: |
           cd mysvr-infra
           # Use yq to update the yaml file safely
+          # Đảm bảo đường dẫn này đúng trong repository mysvr-infra của bạn
           yq e '.image.tag = "${{ github.sha }}"' -i infra/helm/my-app/values.yaml
           
           # Configure git
@@ -58,15 +65,3 @@ jobs:
             git commit -m "Update image tag for my-app to ${{ github.sha }}"
             git push
           fi
-        env:
-          # This is needed to install yq
-          YQ_VERSION: v4.30.8
-          YQ_BINARY: yq_linux_amd64
-          
-      - name: Install yq
-        run: |
-          sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/${YQ_BINARY} -O /usr/bin/yq &&\
-          sudo chmod +x /usr/bin/yq
-        env:
-          YQ_VERSION: v4.30.8
-          YQ_BINARY: yq_linux_amd64
