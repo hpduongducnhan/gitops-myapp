@@ -45,22 +45,17 @@ jobs:
           path: 'mysvr-infra'
           ssh-key: ${{ secrets.INFRA_REPO_DEPLOY_KEY }}
 
-      # --- BƯỚC GỠ LỖI MỚI ---
-      - name: Debug Infra Repo Structure
-        run: |
-          echo "--- Listing contents of the checked-out 'mysvr-infra' directory ---"
-          cd mysvr-infra
-          ls -R
-
       - name: Update image tag and push to infra repo
         run: |
           cd mysvr-infra
-          yq e '.image.tag = "${{ github.sha }}"' -i infra/helm/my-app/values.yaml
+          # SỬA LỖI: Bỏ đi phần "infra/" ở đầu đường dẫn
+          yq e '.image.tag = "${{ github.sha }}"' -i helm/my-app/values.yaml
           
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           
-          git add infra/helm/my-app/values.yaml
+          # SỬA LỖI: Bỏ đi phần "infra/" ở đầu đường dẫn
+          git add helm/my-app/values.yaml
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
