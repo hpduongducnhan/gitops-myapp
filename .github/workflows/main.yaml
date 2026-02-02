@@ -3,14 +3,14 @@ name: Build and Deploy to K3s
 on:
   push:
     branches:
-      - main # Trigger the workflow on push to the main branch
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Permission to push to GHCR
+      packages: write
 
     steps:
       - name: Check out app repository
@@ -28,12 +28,11 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/hpduongducnhan/my-app:${{ github.sha }} # Tag with the commit SHA
+          tags: ghcr.io/hpduongducnhan/my-app:${{ github.sha }}
           labels: |
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.revision=${{ github.sha }}
 
-      # SỬA LỖI: Cài đặt yq TRƯỚC KHI sử dụng nó
       - name: Install yq
         run: |
           sudo wget https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64 -O /usr/local/bin/yq &&\
@@ -42,22 +41,25 @@ jobs:
       - name: Check out infra repository
         uses: actions/checkout@v3
         with:
-          repository: hpduongducnhan/mysvr-infra # Your infrastructure repository
+          repository: hpduongducnhan/mysvr-infra
           path: 'mysvr-infra'
-          ssh-key: ${{ secrets.INFRA_REPO_DEPLOY_KEY }} # Using a deploy key for authentication
+          ssh-key: ${{ secrets.INFRA_REPO_DEPLOY_KEY }}
+
+      # --- BƯỚC GỠ LỖI MỚI ---
+      - name: Debug Infra Repo Structure
+        run: |
+          echo "--- Listing contents of the checked-out 'mysvr-infra' directory ---"
+          cd mysvr-infra
+          ls -R
 
       - name: Update image tag and push to infra repo
         run: |
           cd mysvr-infra
-          # Use yq to update the yaml file safely
-          # Đảm bảo đường dẫn này đúng trong repository mysvr-infra của bạn
           yq e '.image.tag = "${{ github.sha }}"' -i infra/helm/my-app/values.yaml
           
-          # Configure git
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           
-          # Commit and push
           git add infra/helm/my-app/values.yaml
           if git diff --staged --quiet; then
             echo "No changes to commit."
