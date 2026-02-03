@@ -26,4 +26,4 @@ EXPOSE 8000
 
 # Run the application
 # Replace my_app.wsgi with your actual wsgi module if it's different
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
