@@ -1,0 +1,140 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ product.name }} - MyShop{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}" class="text-decoration-none">Trang chủ</a>
+        </li>
+        {% if product.category %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'shop:product_list' %}?category={{ product.category.slug }}" class="text-decoration-none">
+                {{ product.category.name }}
+            </a>
+        </li>
+        {% endif %}
+        <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+    </ol>
+</nav>
+
+<!-- Product Detail -->
+<div class="row g-5">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-none bg-transparent">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="img-fluid img-detail w-100" alt="{{ product.name }}">
+            {% else %}
+            <div class="bg-white img-detail d-flex align-items-center justify-content-center" style="height: 500px;">
+                <i class="bi bi-image text-muted opacity-25" style="font-size: 6rem;"></i>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="ps-lg-4">
+            <h1 class="display-5 fw-bold mb-3">{{ product.name }}</h1>
+
+            <div class="mb-4">
+                {% if product.category %}
+                <span class="badge bg-primary bg-opacity-10 text-primary me-2">
+                    <i class="bi bi-folder me-1"></i> {{ product.category.name }}
+                </span>
+                {% endif %}
+
+                {% for tag in product.tags.all %}
+                <span class="badge bg-light text-dark border me-1">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+
+            <h2 class="display-6 text-primary fw-bold mb-4" style="font-size: 1.75rem;">{{ product.price|floatformat:0
+                }} ₫</h2>
+
+            <div class="d-grid gap-3 mb-5">
+                <button
+                    class="btn btn-primary btn-lg rounded-pill d-flex align-items-center justify-content-center py-2"
+                    onclick="alert('Chức năng đặt hàng đang được phát triển')">
+                    <i class="bi bi-cart-plus me-2 fs-6"></i> Thêm vào giỏ hàng
+                </button>
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <a href="#" class="btn btn-light btn-lg w-100 rounded-pill border py-2"
+                            style="font-size: 0.9rem;">
+                            <i class="bi bi-heart me-2"></i> Yêu thích
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'shop:product_list' %}"
+                            class="btn btn-light btn-lg w-100 rounded-pill border py-2" style="font-size: 0.9rem;">
+                            <i class="bi bi-arrow-left me-2"></i> Tiếp tục mua
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 bg-white shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-file-text me-2 text-primary"></i>Mô tả sản phẩm</h5>
+                    <p class="card-text text-muted" style="white-space: pre-line;">{{ product.description }}</p>
+                </div>
+            </div>
+
+            <div class="row text-center mt-5">
+                <div class="col-4 border-end">
+                    <i class="bi bi-truck fs-3 text-primary mb-2 d-block"></i>
+                    <small class="text-muted fw-bold">Giao hàng miễn phí</small>
+                </div>
+                <div class="col-4 border-end">
+                    <i class="bi bi-shield-check fs-3 text-primary mb-2 d-block"></i>
+                    <small class="text-muted fw-bold">Bảo hành 1 năm</small>
+                </div>
+                <div class="col-4">
+                    <i class="bi bi-arrow-repeat fs-3 text-primary mb-2 d-block"></i>
+                    <small class="text-muted fw-bold">Đổi trả 30 ngày</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Related Products -->
+{% if related_products %}
+<div class="my-5 pt-4">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h3 class="fw-bold mb-0">Sản phẩm liên quan</h3>
+        <a href="{% url 'shop:product_list' %}" class="text-decoration-none fw-medium">Xem tất cả <i
+                class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for product in related_products %}
+        <div class="col">
+            <div class="card h-100 product-card">
+                <div class="position-relative overflow-hidden">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center product-image">
+                        <i class="bi bi-image text-muted opacity-25" style="font-size: 2rem;"></i>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body p-3">
+                    <h6 class="card-title fw-bold text-truncate mb-1">{{ product.name }}</h6>
+                    <p class="text-primary fw-bold mb-2">{{ product.price|floatformat:0 }} ₫</p>
+                    <a href="{% url 'shop:product_detail' product.slug %}"
+                        class="btn btn-sm btn-outline-primary w-100 rounded-pill">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

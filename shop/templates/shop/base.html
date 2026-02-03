@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cửa hàng của tôi{% endblock %}</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary fs-3" href="{% url 'shop:product_list' %}">
+                <i class="bi bi-bag-heart-fill"></i> MyShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto ms-4">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-medium" href="{% url 'shop:product_list' %}">Cửa hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="{% url 'shop:page_detail' 'gioi-thieu' %}">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="{% url 'shop:page_detail' 'lien-he' %}">Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <form class="d-flex me-3" role="search" action="{% url 'shop:product_list' %}" method="GET">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 text-muted"><i
+                                    class="bi bi-search"></i></span>
+                            <input class="form-control bg-light border-start-0 ps-0" type="search" name="q"
+                                value="{{ request.GET.q }}" placeholder="Tìm sản phẩm..." aria-label="Search">
+                        </div>
+                    </form>
+                    <a href="{% url 'admin:index' %}" class="btn btn-primary rounded-pill px-4">
+                        Quản trị
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner (Conditional - Only on Home or special pages if needed, but keeping simple for now) -->
+
+    <!-- Main Content -->
+    <main class="py-5 bg-light-subtle min-vh-100">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top pt-5 pb-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary mb-3">MyShop</h5>
+                    <p class="text-muted">Trải nghiệm mua sắm trực tuyến tuyệt vời với hàng ngàn sản phẩm chất lượng cao
+                        và dịch vụ tận tâm.</p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="fw-bold mb-3">Mua sắm</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Sản phẩm mới</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Khuyến mãi</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Bán chạy
+                                nhất</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="fw-bold mb-3">Hỗ trợ</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Chính sách đổi
+                                trả</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Hướng dẫn mua
+                                hàng</a></li>
+                        <li class="mb-2"><a href="{% url 'shop:page_detail' 'lien-he' %}"
+                                class="text-decoration-none text-muted hover-link">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold mb-3">Đăng ký nhận tin</h6>
+                    <p class="text-muted small">Nhận thông tin khuyến mãi mới nhất từ chúng tôi.</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email của bạn">
+                        <button class="btn btn-primary" type="button"><i class="bi bi-send"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 text-muted opacity-25">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <small class="text-muted">&copy; 2026 MyShop. All rights reserved.</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <small class="text-muted">Designed by Antigravity</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

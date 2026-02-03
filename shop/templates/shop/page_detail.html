@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ page.title }} - MyShop{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}" class="text-decoration-none">Trang chủ</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+    </ol>
+</nav>
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-5">
+                <h1 class="display-5 fw-bold mb-4 text-center">{{ page.title }}</h1>
+                <hr class="mb-5 opacity-25">
+
+                <div class="content fs-6 lh-lg">
+                    {{ page.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
