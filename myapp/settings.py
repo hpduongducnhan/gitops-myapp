@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h0@9(wbdh9t4(zej+ww**tyu%4i&m&!y^^&c$s^2+pnp+m^5i7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'shop.nhandd.site']
 
 
 # Application definition
