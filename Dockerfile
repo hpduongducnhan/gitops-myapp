@@ -8,6 +8,11 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /code
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    netcat-traditional \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install Poetry
 # Using a specific version to ensure consistent builds
 RUN pip install poetry==2.3.2
@@ -21,9 +26,11 @@ RUN poetry install --no-root
 # Copy the rest of the project code
 COPY . /code/
 
+# Make entrypoint script executable
+RUN chmod +x /code/entrypoint.sh
+
 # Expose the port the app runs on
 EXPOSE 8000
 
-# Run the application
-# Replace my_app.wsgi with your actual wsgi module if it's different
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run the application with entrypoint script
+CMD ["/code/entrypoint.sh"]
