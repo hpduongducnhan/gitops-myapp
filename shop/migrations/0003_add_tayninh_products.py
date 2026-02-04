@@ -41,7 +41,8 @@ Công dụng: Chấm trái cây (xoài, ổi, khế), rau củ luộc, thịt n�
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng kể từ ngày sản xuất''',
             'price': 35000,
-            'priority': 10
+            'priority': 10,
+            'image': 'products/muoi-ot-tay-ninh.png'
         },
         {
             'name': 'Muối Tôm Tây Ninh',
@@ -59,7 +60,8 @@ Công dụng: Chấm trái cây, rau sống, bánh tráng, thịt luộc
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng''',
             'price': 45000,
-            'priority': 9
+            'priority': 9,
+            'image': 'products/muoi-tom-tay-ninh.png'
         },
         {
             'name': 'Muối Tiêu Tây Ninh',
@@ -77,7 +79,8 @@ Công dụng: Chấm hoa quả, thịt nướng, hải sản, làm gia vị nấ
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng''',
             'price': 40000,
-            'priority': 8
+            'priority': 8,
+            'image': 'products/muoi-tieu-tay-ninh.png'
         },
         {
             'name': 'Muối Rang Tây Ninh',
@@ -95,7 +98,8 @@ Công dụng: Chấm trái cây, làm gia vị, ướp thịt
 Trọng lượng: 150g/hộp
 Hạn sử dụng: 12 tháng''',
             'price': 25000,
-            'priority': 7
+            'priority': 7,
+            'image': 'products/muoi-rang-tay-ninh.png'
         },
         {
             'name': 'Muối Sate Tây Ninh',
@@ -113,7 +117,8 @@ Công dụng: Chấm hải sản nướng, thịt nướng, lẩu, bún bò
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng''',
             'price': 50000,
-            'priority': 6
+            'priority': 6,
+            'image': 'products/muoi-sate-tay-ninh.png'
         },
         {
             'name': 'Muối Tỏi Ớt Tây Ninh',
@@ -131,7 +136,8 @@ Công dụng: Chấm thịt nướng, hải sản, rau củ, trộn salad
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 4 tháng (bảo quản lạnh)''',
             'price': 42000,
-            'priority': 5
+            'priority': 5,
+            'image': 'products/muoi-toi-ot-tay-ninh.png'
         },
         {
             'name': 'Muối Mè Rang Tây Ninh',
@@ -149,7 +155,8 @@ Công dụng: Chấm chuối, khoai luộc, rau củ, làm gia vị
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng''',
             'price': 38000,
-            'priority': 4
+            'priority': 4,
+            'image': 'products/muoi-me-rang-tay-ninh.png'
         },
         {
             'name': 'Muối Vừng Đen Tây Ninh',
@@ -167,7 +174,8 @@ Công dụng: Chấm trái cây, rau củ, làm topping cho món ăn
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 6 tháng''',
             'price': 48000,
-            'priority': 3
+            'priority': 3,
+            'image': 'products/muoi-vung-den-tay-ninh.png'
         },
         {
             'name': 'Muối Ớt Xanh Tây Ninh',
@@ -181,11 +189,12 @@ Hạn sử dụng: 6 tháng''',
 - Hương thơm đặc trưng
 
 Công dụng: Chấm hải sản, thịt luộc, bánh tráng
-
+            
 Trọng lượng: 100g/hộp
 Hạn sử dụng: 4 tháng (bảo quản lạnh)''',
             'price': 40000,
-            'priority': 2
+            'priority': 2,
+            'image': 'products/muoi-ot-xanh-tay-ninh.png'
         },
     ]
     
@@ -214,7 +223,8 @@ Thành phần: Bánh tráng, muối ớt, mè rang, đường, dầu ăn
 Trọng lượng: 200g/gói
 Hạn sử dụng: 3 tháng''',
             'price': 35000,
-            'priority': 10
+            'priority': 10,
+            'image': 'products/banh-trang-tron-tay-ninh.png'
         },
         {
             'name': 'Bánh Tráng Nướng Mắm Ruốc',
@@ -232,7 +242,8 @@ Thành phần: Bánh tráng, mắm ruốc, hành phi, mè
 Trọng lượng: 150g/gói
 Hạn sử dụng: 2 tháng''',
             'price': 45000,
-            'priority': 9
+            'priority': 9,
+            'image': 'products/banh-trang-nuong-mam-ruoc.png'
         },
         {
             'name': 'Bánh Tráng Phơi Sương',
@@ -250,7 +261,8 @@ Công dụng: Cuốn thịt nướng, gỏi cuốn, ăn kèm lẩu
 Trọng lượng: 300g/gói
 Hạn sử dụng: 6 tháng''',
             'price': 55000,
-            'priority': 8
+            'priority': 8,
+            'image': 'products/banh-trang-phoi-suong.png'
         },
         {
             'name': 'Bánh Tráng Dừa Non',
@@ -268,7 +280,8 @@ Công dụng: Ăn vặt, cuốn thịt, làm gỏi
 Trọng lượng: 250g/gói
 Hạn sử dụng: 4 tháng''',
             'price': 48000,
-            'priority': 7
+            'priority': 7,
+            'image': 'products/banh-trang-dua-non.png'
         },
         {
             'name': 'Bánh Tráng Mè Đen',
